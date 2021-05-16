@@ -1,0 +1,4 @@
+SonosButtons KEYWORD1
+enableWiFi	KEYWORD2
+enableOTA	KEYWORD2
+handle		KEYWORD2

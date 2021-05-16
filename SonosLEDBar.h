@@ -1,7 +1,7 @@
 /*
-	Created by Martin Mulder - deFEEST, April 2021
-	Released into the public domain
-*/
+   Created by Martin Mulder - deFEEST, April 2021
+   Released into the public domain
+   */
 
 #ifndef SonosLEDBar_h
 #define SonosLEDBar_h

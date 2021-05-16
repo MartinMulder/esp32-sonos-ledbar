@@ -80,13 +80,13 @@ void SonosLEDBar::handle()
 
 			Serial.println("Loop through volume");
 			for( int j = 0; j <= 50; j++) {
-    		setVolume(j*5);
+				setVolume(j*5);
 				showVolumeOnLeds();
-  	  	delay(2000);
-  		}
+				delay(2000);
+			}
 
 			break;
-		// We are in VOLUME MODE
+			// We are in VOLUME MODE
 		case VOLUME:
 			// Check if we still need to display the volume
 			if (currentMillis - _lastVolumeSet > SONOSLEDBAR_VOLUMEDISPLAYTIME) {
@@ -102,7 +102,7 @@ void SonosLEDBar::handle()
 				showVolumeOnLeds();
 			}
 			//Serial.print(F("currentState: VOLUME"));
-			
+
 			break;
 	}
 }
@@ -144,52 +144,52 @@ void SonosLEDBar::showVolumeOnLeds()
 
 	// Loop through the leds
 	for (int i = 0; i < SONOSLEDBAR_NUMLEDS; i++) {
-					if (i+1 <= fullRedLeds) {
-									Serial.print("Setting led: ");
-									Serial.print(i+1);
-									Serial.println(" to red");
-									showRed(i*3);
-					} else if (i+1 == fullRedLeds + 1 && moduloLastLed > 0) {
-									int foo = volumeStepsPerLed/3;
-									if (foo < moduloLastLed && foo*2 < moduloLastLed) {
-													Serial.print("Setting led: ");
-													Serial.print(i+1);
-													Serial.println(" to orange");
-													showOrange(i*3);
-									} else if (foo < moduloLastLed) {
-													Serial.print("Setting led: ");
-													Serial.print(i+1);
-													Serial.println(" to yellow");
-													showYellow(i*3);
-									} else {
-													Serial.print("Setting led: ");
-													Serial.print(i+1);
-													Serial.println(" off");
-													showNone(i*3);
-									}
-					} else {
-									Serial.print("Turn off led: ");
-									Serial.println(i+1);
-									showNone(i*3);
-					}
+		if (i+1 <= fullRedLeds) {
+			Serial.print("Setting led: ");
+			Serial.print(i+1);
+			Serial.println(" to red");
+			showRed(i*3);
+		} else if (i+1 == fullRedLeds + 1 && moduloLastLed > 0) {
+			int foo = volumeStepsPerLed/3;
+			if (foo < moduloLastLed && foo*2 < moduloLastLed) {
+				Serial.print("Setting led: ");
+				Serial.print(i+1);
+				Serial.println(" to orange");
+				showOrange(i*3);
+			} else if (foo < moduloLastLed) {
+				Serial.print("Setting led: ");
+				Serial.print(i+1);
+				Serial.println(" to yellow");
+				showYellow(i*3);
+			} else {
+				Serial.print("Setting led: ");
+				Serial.print(i+1);
+				Serial.println(" off");
+				showNone(i*3);
+			}
+		} else {
+			Serial.print("Turn off led: ");
+			Serial.println(i+1);
+			showNone(i*3);
+		}
 	}
 }
 
 // Only give the R Channel, G and B channels are a derivative
 void SonosLEDBar::showRed(uint8_t r_channel)
 {
-  Serial.print("Setting red on r_channel: " );
+	Serial.print("Setting red on r_channel: " );
 	Serial.println(r_channel);
 
 	ledcWrite(r_channel, 155);
 	ledcWrite(r_channel+1, 0);
 	ledcWrite(r_channel+2, 0);
 }
-													
+
 // Only give the R Channel, G and B channels are a derivative
 void SonosLEDBar::showOrange(uint8_t r_channel)
 {
-  Serial.print("Setting orange on r_channel: " );
+	Serial.print("Setting orange on r_channel: " );
 	Serial.println(r_channel);
 
 	ledcWrite(r_channel, 175);
@@ -199,7 +199,7 @@ void SonosLEDBar::showOrange(uint8_t r_channel)
 // Only give the R Channel, G and B channels are a derivative
 void SonosLEDBar::showYellow(uint8_t r_channel)
 {
-  Serial.print("Setting yellow on r_channel: " );
+	Serial.print("Setting yellow on r_channel: " );
 	Serial.println(r_channel);
 
 	ledcWrite(r_channel, 140);
@@ -209,12 +209,10 @@ void SonosLEDBar::showYellow(uint8_t r_channel)
 // Only give the R Channel, G and B channels are a derivative
 void SonosLEDBar::showNone(uint8_t r_channel)
 {
-  Serial.print("Setting off on r_channel: " );
+	Serial.print("Setting off on r_channel: " );
 	Serial.println(r_channel);
 
 	ledcWrite(r_channel, 0);
 	ledcWrite(r_channel+1, 0);
 	ledcWrite(r_channel+2, 0);
 }
-
-
